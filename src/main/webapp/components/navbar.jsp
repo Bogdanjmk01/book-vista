@@ -16,7 +16,7 @@
         <div class="col-md-3">
             <a href="" class="btn btn-outline-success">Login</a>
             <span>&nbsp;</span>
-            <a href="" class="btn btn-outline-primary">Register</a>
+            <a href="register.jsp" class="btn btn-outline-primary">Register</a>
         </div>
 
     </div>
