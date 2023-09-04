@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register Page</title>
+    <title>Login Page</title>
     <%@include file="components/all_css.jsp" %>
 </head>
 <body>
@@ -15,28 +15,14 @@
                     <div class="card-body p-md-5">
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-lg-4 col-xl-5 order-2 order-lg-1">
-                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"><b>Register</b></p>
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"><b>Login</b></p>
 
                                 <form class="mx-1 mx-md-4" action="UserServlet" method="post">
-
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="bi bi-person-rolodex bi-3x me-3" style="font-size: 20px"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input type="text" id="form3Example1c" class="form-control" placeholder="Enter your full name" name="fullName" />
-                                        </div>
-                                    </div>
 
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="bi bi-envelope-fill bi-2x me-3"></i>
                                         <div class="form-outline flex-fill mb-0">
                                             <input type="email" id="form3Example3c" class="form-control" placeholder="Enter your email" name="email" />
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="bi bi-telephone-inbound-fill me-3"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="form3Example4c" class="form-control" placeholder="Enter your phone number" name="password" />
                                         </div>
                                     </div>
 
@@ -55,12 +41,11 @@
                                     </div>
 
                                     <div class="form-check d-flex justify-content-center mb-5">
-                                        <p style="color: #1480aa">Already have an account? <a href="login.jsp"><b> Click here to Login</b></a></p>
+                                        <p style="color: #1480aa">Don't have an account? <a href="register.jsp"><b> Click here to Register</b></a></p>
                                     </div>
 
-
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <button type="submit" class="btn btn-outline-dark btn-lg">Register</button>
+                                        <button type="submit" class="btn btn-outline-dark btn-lg">Login</button>
                                     </div>
 
                                 </form>
