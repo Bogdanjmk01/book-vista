@@ -1,3 +1,5 @@
+<%@ page import="com.bogdanjmk.book_vista.db.DatabaseConnection" %>
+<%@ page import="java.sql.Connection" %>
 <html>
 <head>
     <meta charset="ISO-8859-1">

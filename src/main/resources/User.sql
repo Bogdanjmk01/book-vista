@@ -1,0 +1,12 @@
+CREATE TABLE USERS(
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(60) NOT NULL,
+  email VARCHAR(45) NOT NULL UNIQUE,
+  phone_number VARCHAR(45) NOT NULL,
+  password VARCHAR(60) NOT NULL,
+  address VARCHAR(45),
+  landmark VARCHAR(45),
+  city VARCHAR(45),
+  state VARCHAR(45),
+  zip_code VARCHAR(45)
+);

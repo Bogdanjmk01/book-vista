@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +18,12 @@
                     <div class="card-body p-md-5">
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-lg-4 col-xl-5 order-2 order-lg-1">
+
+                                <c:if test="${not empty register_success}">
+                                    <p class="text-center text-success alert alert-success w-100"><b>${ register_success }</b></p>
+                                    <c:remove var="register_success" scope="session" />
+                                </c:if>
+
                                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"><b>Login</b></p>
 
                                 <form class="mx-1 mx-md-4" action="UserServlet" method="post">

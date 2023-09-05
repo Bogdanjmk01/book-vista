@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page isELIgnored="false" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,9 +18,15 @@
                     <div class="card-body p-md-5">
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-lg-4 col-xl-5 order-2 order-lg-1">
+
+                                <c:if test="${not empty register_failed}">
+                                    <p class="text-center text-danger alert alert-danger w-100"><b>${ register_failed }</b></p>
+                                    <c:remove var="register_failed" scope="session" />
+                                </c:if>
+
                                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"><b>Register</b></p>
 
-                                <form class="mx-1 mx-md-4" action="UserServlet" method="post">
+                                <form class="mx-1 mx-md-4" action="register" method="post">
 
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="bi bi-person-rolodex bi-3x me-3" style="font-size: 20px"></i>
@@ -36,7 +45,7 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="bi bi-telephone-inbound-fill me-3"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="form3Example4c" class="form-control" placeholder="Enter your phone number" name="password" />
+                                            <input type="text" id="form3Example4c" class="form-control" placeholder="Enter your phone number" name="phone_number" />
                                         </div>
                                     </div>
 
@@ -47,10 +56,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-check d-flex justify-content-center mb-5">
-                                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                                    <div class="form-check d-flex justify-content-center mb-2">
+                                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" name="check" />
                                         <label class="form-check-label" for="form2Example3c">
-                                            Remember Me
+                                            I agree all statements in <a href="#!">Terms of service</a>
                                         </label>
                                     </div>
 
