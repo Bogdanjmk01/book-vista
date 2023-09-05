@@ -4,4 +4,12 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <context-param>
+    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+    <param-value>WEB-INF/lib/fmt</param-value>
+  </context-param>
+  <context-param>
+    <param-name>org.apache.taglibs.standard.tlv.JstlCoreTLV</param-name>
+    <param-value>WEB-INF/lib/fmt</param-value>
+  </context-param>
 </web-app>
