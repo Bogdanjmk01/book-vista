@@ -1,4 +1,4 @@
-package com.bogdanjmk.book_vista.servlet;
+package com.bogdanjmk.book_vista.servlet.user;
 
 import com.bogdanjmk.book_vista.dao.UserDAO;
 import com.bogdanjmk.book_vista.dao.impl.UserDAOImpl;
