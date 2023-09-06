@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 @RequiredArgsConstructor
 public class UserDAOImpl implements UserDAO {
@@ -37,5 +38,39 @@ public class UserDAOImpl implements UserDAO {
         }
 
         return f;
+    }
+
+    @Override
+    public User loginUser(String email, String password) {
+        User loggedInUser = null;
+
+        try {
+            String sql = """
+                     SELECT * FROM users WHERE email = ? AND password = ?;
+                    """;
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                loggedInUser = new User();
+                loggedInUser.setId(rs.getLong("id"));
+                loggedInUser.setName(rs.getString("name"));
+                loggedInUser.setEmail(rs.getString("email"));
+                loggedInUser.setPhone_number(rs.getString("phone_number"));
+                loggedInUser.setAddress(rs.getString("address"));
+                loggedInUser.setLandmark(rs.getString("landmark"));
+                loggedInUser.setCity(rs.getString("city"));
+                loggedInUser.setState(rs.getString("state"));
+                loggedInUser.setZip_code(rs.getString("zip_code"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return loggedInUser;
     }
 }

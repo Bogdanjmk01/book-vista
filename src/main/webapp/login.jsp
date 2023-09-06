@@ -24,9 +24,14 @@
                                     <c:remove var="register_success" scope="session" />
                                 </c:if>
 
+                                <c:if test="${not empty login_failed}">
+                                    <p class="text-center text-danger alert alert-danger w-100"><b>${ login_failed }</b></p>
+                                    <c:remove var="login_failed" scope="session" />
+                                </c:if>
+
                                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"><b>Login</b></p>
 
-                                <form class="mx-1 mx-md-4" action="UserServlet" method="post">
+                                <form class="mx-1 mx-md-4" action="login" method="post">
 
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="bi bi-envelope-fill bi-2x me-3"></i>
@@ -42,7 +47,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-check d-flex justify-content-center mb-5">
+                                    <!-- To implement remember me functionality -->
+                                    <div class="form-check d-flex justify-content-center mb-2">
                                         <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
                                         <label class="form-check-label" for="form2Example3c">
                                             Remember Me
