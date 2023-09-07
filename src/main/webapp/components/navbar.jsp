@@ -1,3 +1,6 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page isELIgnored="false" %>
+
 <div class="container-fluid" style="height: 10px; background-color: #608fd5"></div>
 
 <div class="p-3">
@@ -14,11 +17,35 @@
         </div>
 
         <div class="col-md-3">
-            <a href="login.jsp" class="btn btn-outline-success">Login</a>
-            <span>&nbsp;</span>
-            <a href="register.jsp" class="btn btn-outline-primary">Register</a>
+            <c:if test="${not empty userObj}">
+                <button class="btn btn-outline-success" disabled style="pointer-events: none">${userObj.name}</button>
+                <a class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-arrow-right-to-bracket mt-1"></i> Logout</a>
+            </c:if>
+
+            <c:if test="${empty userObj}">
+                <a href="login.jsp" class="btn btn-outline-success"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+                <span>&nbsp;</span>
+                <a href="register.jsp" class="btn btn-outline-primary"><i class="fa-solid fa-square-plus"></i> Register</a>
+            </c:if>
         </div>
 
+        <div class="modal fade" tabindex="-1" id="logoutModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Logout</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p style="font-size: 20px"><b>Are you sure you want to log out?</b></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="logout" type="button" class="btn btn-outline-dark">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

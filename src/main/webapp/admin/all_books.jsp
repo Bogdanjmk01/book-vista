@@ -26,6 +26,11 @@
 </head>
 
 <body>
+
+<c:if test="${empty adminUser}">
+    <c:redirect url="../login.jsp" />
+</c:if>
+
 <nav>
     <div class="logo-name">
         <div class="logo-image">
@@ -59,10 +64,12 @@
         </ul>
 
         <ul class="logout-mode">
-            <li><a href="../authentication/logout.php">
-                <i class="uil uil-signout"></i>
-                <span class="link-name">Logout</span>
-            </a></li>
+            <li>
+                <a href="../logout">
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name">Logout</span>
+                </a>
+            </li>
 
             <li class="mode">
                 <a href="#">
@@ -131,8 +138,8 @@
                                 <td><%= book.getBook_category()%></td>
                                 <td><%= book.getStatus() %></td>
                                 <td class="gap-2">
-                                    <a href="edit_book.jsp?id=<%= book.getId() %>" class="btn btn-sm btn-outline-dark">Edit</a>
-                                    <a href="../delete_book?id=<%= book.getId() %>" class="btn btn-sm btn-outline-danger">Delete</a>
+                                    <a href="edit_book.jsp?id=<%= book.getId() %>" class="btn btn-sm btn-outline-dark"><i class="uil uil-comment-edit"></i> Edit</a>
+                                    <a href="../delete_book?id=<%= book.getId() %>" class="btn btn-sm btn-outline-danger"><i class="uil uil-times-circle"></i> Delete</a>
                                 </td>
                             </tr>
                     <%}

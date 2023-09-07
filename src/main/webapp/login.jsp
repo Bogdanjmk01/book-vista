@@ -29,6 +29,11 @@
                                     <c:remove var="login_failed" scope="session" />
                                 </c:if>
 
+                                <c:if test="${not empty logout_success}">
+                                    <p class="text-center text-success alert alert-success w-100"><b>${ logout_success }</b></p>
+                                    <c:remove var="logout_success" scope="session" />
+                                </c:if>
+
                                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"><b>Login</b></p>
 
                                 <form class="mx-1 mx-md-4" action="login" method="post">
@@ -49,7 +54,7 @@
 
                                     <!-- To implement remember me functionality -->
                                     <div class="form-check d-flex justify-content-center mb-2">
-                                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                                        <input class="form-check-input me-2" type="checkbox" name="remember_me" value="" id="form2Example3c" />
                                         <label class="form-check-label" for="form2Example3c">
                                             Remember Me
                                         </label>
