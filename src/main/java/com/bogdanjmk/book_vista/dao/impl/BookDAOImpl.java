@@ -78,4 +78,87 @@ public class BookDAOImpl implements BookDAO {
 
         return books;
     }
+
+    @Override
+    public Book getBookById(Long id) {
+        Book book = null;
+
+        try {
+            String sql = """
+                    SELECT * FROM books WHERE id = ?;
+                    """;
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                book = new Book();
+
+                book.setId(rs.getLong("id"));
+                book.setBook_name(rs.getString("book_name"));
+                book.setAuthor(rs.getString("author"));
+                book.setPrice(rs.getDouble("price"));
+                book.setBook_category(rs.getString("book_category"));
+                book.setStatus(rs.getString("status"));
+                book.setPhoto(rs.getString("photo"));
+                book.setEmail(rs.getString("email"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return book;
+    }
+
+    @Override
+    public boolean updateBook(Book book) {
+        boolean f = false;
+
+        try {
+            String sql = """
+                    UPDATE books SET book_name = ?, author = ?, price = ?, status = ? WHERE id = ?;
+                    """;
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, book.getBook_name());
+            ps.setString(2, book.getAuthor());
+            ps.setDouble(3, book.getPrice());
+            ps.setString(4, book.getStatus());
+            ps.setLong(5, book.getId());
+
+            int i = ps.executeUpdate();
+
+            if (i == 1) {
+                f = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return f;
+    }
+
+    @Override
+    public boolean deleteBook(Long id) {
+        boolean f = false;
+
+        try {
+            String sql = """
+                    DELETE FROM books WHERE id = ?;
+                    """;
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setLong(1, id);
+            int i = ps.executeUpdate();
+
+            if (i == 1) {
+                f = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return f;
+    }
 }

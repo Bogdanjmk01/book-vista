@@ -2,7 +2,6 @@
 <%@ page import="com.bogdanjmk.book_vista.dao.impl.BookDAOImpl" %>
 <%@ page import="com.bogdanjmk.book_vista.db.DatabaseConnection" %>
 <%@ page import="com.bogdanjmk.book_vista.entity.Book" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page isELIgnored="false" %>
@@ -79,71 +78,64 @@
 </nav>
 
 <section class="dashboard">
-    <div class="table-container">
 
-        <c:if test="${not empty success_message}">
-            <p class="text-center text-success alert alert-success w-100">${success_message}</p>
-            <c:remove var="success_message" scope="session" />
-        </c:if>
+    <c:if test="${not empty update_failed}">
+        <p class="text-center text-danger alert alert-danger w-100">${update_failed}</p>
+        <c:remove var="update_failed" scope="session" />
+    </c:if>
 
-        <c:if test="${not empty update_success}">
-            <p class="text-center text-success alert alert-success w-100">${update_success}</p>
-            <c:remove var="update_success" scope="session" />
-        </c:if>
+    <%
+        Long id = Long.parseLong(request.getParameter("id"));
+        BookDAO bookDAO = new BookDAOImpl(DatabaseConnection.getConnection());
 
-        <c:if test="${not empty delete_success}">
-            <p class="text-center text-success alert alert-success w-100">${delete_success}</p>
-            <c:remove var="delete_success" scope="session" />
-        </c:if>
+        Book book = bookDAO.getBookById(id);
+    %>
 
-        <c:if test="${not empty delete_failed}">
-            <p class="text-center text-warning alert alert-warning w-100">${delete_failed}</p>
-            <c:remove var="delete_failed" scope="session" />
-        </c:if>
+    <div class="login-box">
+        <h2>Edit Book</h2>
+        <form method="post" action="../edit_book">
+            <input type="hidden" name="id" value="<%= book.getId() %>">
+            <div class="user-box">
+                <input type="text" name="book_name" required="" value="<%= book.getBook_name() %>">
+                <label>Book Name</label>
+            </div>
+            <div class="user-box">
+                <input type="text" name="author" required="" value="<%= book.getAuthor() %>">
+                <label>Author Name</label>
+            </div>
+            <div class="user-box">
+                <input type="text" name="price" required="" value="<%= book.getPrice() %>">
+                <label>Price</label>
+            </div>
 
-        <h2 style="color: #a49c9c">Books</h2>
+            <div>&nbsp;</div>
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Image</th>
-                <th scope="col">Book Name</th>
-                <th scope="col">Author</th>
-                <th scope="col">Price</th>
-                <th scope="col">Category</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-                <%
-                    BookDAO bookDAO = new BookDAOImpl(DatabaseConnection.getConnection());
-                    List<Book> books = bookDAO.getAllBooks();
+            <div class="form-group">
+                <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example" name="status">
+                    <% if ("Active".equals(book.getStatus())) { %>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                    <% } else { %>
+                    <option value="Inactive">Inactive</option>
+                    <option value="Active">Active</option>
+                    <% } %>
+                </select>
+            </div>
 
-                    for (Book book : books) { %>
-                            <tr>
-                                <td><%= book.getId() %></td>
-                                <td><img src="../books/<%= book.getPhoto() %>" style="width: 50px; height: 50px"></td>
-                                <td><%= book.getBook_name() %></td>
-                                <td><%= book.getAuthor() %></td>
-                                <td><%= book.getPrice() %></td>
-                                <td><%= book.getBook_category()%></td>
-                                <td><%= book.getStatus() %></td>
-                                <td class="gap-2">
-                                    <a href="edit_book.jsp?id=<%= book.getId() %>" class="btn btn-sm btn-outline-dark">Edit</a>
-                                    <a href="../delete_book?id=<%= book.getId() %>" class="btn btn-sm btn-outline-danger">Delete</a>
-                                </td>
-                            </tr>
-                    <%}
-                %>
-            </tbody>
-        </table>
+            <div>&nbsp;</div>
+
+            <button type="submit" name="submit" class="register-button">
+                Update Book
+            </button>
+
+            <div>&nbsp;</div>
+        </form>
+        </form>
     </div>
 </section>
 
 <script>
-    const body = document.querySelector("body"),
+    const body = document.querySelector("body");
     modeToggle = body.querySelector(".mode-toggle");
     sidebar = body.querySelector("nav");
     sidebarToggle = body.querySelector(".sidebar-toggle");
