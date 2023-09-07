@@ -1,26 +1,26 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page isELIgnored="false" %>
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
-<%--    <link rel="stylesheet" href="../css/style.css">--%>
+    <link rel="stylesheet" href="components/style.css">
     <link rel="stylesheet" href="components/admin.css">
+    <link rel="stylesheet" href="components/add_books.css">
 
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
+
 <body>
-<h1>Admin Page</h1>
-
-<c:if test="${not empty adminUser}">
-    <h1>Name: ${userObj.name}</h1>
-    <h1>Name: ${userObj.email}</h1>
-</c:if>
-
 <nav>
     <div class="logo-name">
         <div class="logo-image">
@@ -38,7 +38,7 @@
                 <a href="add_books.jsp">
                     <i class="uil uil-diary"></i>
                     <span class="link-name">Add new Book</span>
-                 </a>
+                </a>
             </li>
             <li>
                 <a href="books.jsp">
@@ -46,6 +46,7 @@
                     <span class="link-name">See all Books</span>
                 </a>
             </li>
+
             <li><a href="#">
                 <i class="uil uil-chart"></i>
                 <span class="link-name">Analytics</span>
@@ -72,55 +73,58 @@
     </div>
 </nav>
 
-<form method="post">
-    <section class="dashboard">
-        <div class="top">
-            <i class="uil uil-bars sidebar-toggle"></i>
-
-            <div class="search-box">
-                <i class="uil uil-search"></i>
-                <input type="text" placeholder="Search here...">
+<section class="dashboard">
+    <div class="login-box">
+        <h2>Add Trains</h2>
+        <form method="post" action="../add_books" enctype='multipart/form-data'>
+            <div class="user-box">
+                <input type="text" name="book_name" required="">
+                <label>Book Name</label>
             </div>
-        </div>
-
-        <div class="dash-content">
-            <div class="overview">
-                <div class="title">
-                </div>
-
-                <div class="boxes">
-                    <div class="box box1">
-                        <i class="uil uil-thumbs-up"></i>
-                        <span class="text">Total Likes</span>
-                        <span class="number">50,120</span>
-                    </div>
-                    <div class="box box2">
-                        <i class="uil uil-comments"></i>
-                        <span class="text">Comments</span>
-                        <span class="number">20,120</span>
-                    </div>
-                    <div class="box box3">
-                        <i class="uil uil-share"></i>
-                        <span class="text">Total Share</span>
-                        <span class="number">10,120</span>
-                    </div>
-                </div>
+            <div class="user-box">
+                <input type="text" name="author" required="">
+                <label>Author Name</label>
+            </div>
+            <div class="user-box">
+                <input type="text" name="price" required="">
+                <label>Price</label>
             </div>
 
-            <div class="activity">
-                <div class="title">
-                    <i class="uil uil-clock-three"></i>
-                    <span class="text">Recent Activity</span>
-                </div>
-
-                <div class="activity-data">
-
-                </div>
-                </div>
+            <div class="form-group">
+                <select name="book_category" class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                    <option selected>--Select--</option>
+                    <option value="Inactive">New Book</option>
+                </select>
             </div>
-        </div>
-    </section>
-</form>
+
+            <div>&nbsp;</div>
+
+            <div class="form-group">
+                <select class="form-select form-select-md mb-3" name="status" aria-label=".form-select-lg example">
+                    <option selected>--Select--</option>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+            </div>
+
+            <div>&nbsp;</div>
+
+            <div class="form-group">
+                <label for="formFileLg" class="form-label text-white">Upload Photo</label>
+                <input class="form-control form-control-md text-white" id="formFileLg" name="photo" type="file" />
+            </div>
+
+            <div>&nbsp;</div>
+
+            <button type="submit" name="submit" class="register-button">
+                Add Book
+            </button>
+
+            <div>&nbsp;</div>
+        </form>
+        </form>
+    </div>
+</section>
 
 <script>
     const body = document.querySelector("body"),
@@ -157,4 +161,5 @@
     })
 </script>
 </body>
+
 </html>
