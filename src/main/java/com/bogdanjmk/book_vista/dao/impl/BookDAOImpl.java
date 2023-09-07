@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class BookDAOImpl implements BookDAO {
@@ -40,5 +43,39 @@ public class BookDAOImpl implements BookDAO {
         }
 
         return f;
+    }
+
+    @Override
+    public List<Book> getAllBooks() {
+        List<Book> books = new ArrayList<>();
+        Book book;
+
+        try {
+            String sql = """
+                    SELECT * FROM books;
+                    """;
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                book = new Book();
+
+                book.setId(rs.getLong("id"));
+                book.setBook_name(rs.getString("book_name"));
+                book.setAuthor(rs.getString("author"));
+                book.setPrice(rs.getDouble("price"));
+                book.setBook_category(rs.getString("book_category"));
+                book.setStatus(rs.getString("status"));
+                book.setPhoto(rs.getString("photo"));
+                book.setEmail(rs.getString("email"));
+
+                books.add(book);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return books;
     }
 }

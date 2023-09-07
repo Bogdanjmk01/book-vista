@@ -41,7 +41,7 @@
                  </a>
             </li>
             <li>
-                <a href="books.jsp">
+                <a href="all_books.jsp">
                     <i class="uil uil-books"></i>
                     <span class="link-name">See all Books</span>
                 </a>
@@ -53,10 +53,12 @@
         </ul>
 
         <ul class="logout-mode">
-            <li><a href="../authentication/logout.php">
-                <i class="uil uil-signout"></i>
-                <span class="link-name">Logout</span>
-            </a></li>
+            <li>
+                    <a href="../authentication/logout.php">
+                        <i class="uil uil-signout"></i>
+                        <span class="link-name">Logout</span>
+                     </a>
+            </li>
 
             <li class="mode">
                 <a href="#">

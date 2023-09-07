@@ -1,3 +1,8 @@
+<%@ page import="com.bogdanjmk.book_vista.dao.BookDAO" %>
+<%@ page import="com.bogdanjmk.book_vista.dao.impl.BookDAOImpl" %>
+<%@ page import="com.bogdanjmk.book_vista.db.DatabaseConnection" %>
+<%@ page import="com.bogdanjmk.book_vista.entity.Book" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page isELIgnored="false" %>
@@ -74,55 +79,45 @@
 </nav>
 
 <section class="dashboard">
-    <div class="login-box">
-        <h2>Add Book</h2>
-        <form method="post" action="../add_books" enctype='multipart/form-data'>
-            <div class="user-box">
-                <input type="text" name="book_name" required="">
-                <label>Book Name</label>
-            </div>
-            <div class="user-box">
-                <input type="text" name="author" required="">
-                <label>Author Name</label>
-            </div>
-            <div class="user-box">
-                <input type="text" name="price" required="">
-                <label>Price</label>
-            </div>
+    <div class="table-container">
+        <h2 style="color: #a49c9c">Books</h2>
 
-            <div class="form-group">
-                <select name="book_category" class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
-                    <option selected>--Select--</option>
-                    <option value="Inactive">New Book</option>
-                </select>
-            </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Image</th>
+                <th scope="col">Book Name</th>
+                <th scope="col">Author</th>
+                <th scope="col">Price</th>
+                <th scope="col">Category</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                <%
+                    BookDAO bookDAO = new BookDAOImpl(DatabaseConnection.getConnection());
+                    List<Book> books = bookDAO.getAllBooks();
 
-            <div>&nbsp;</div>
-
-            <div class="form-group">
-                <select class="form-select form-select-md mb-3" name="status" aria-label=".form-select-lg example">
-                    <option selected>--Select--</option>
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
-                </select>
-            </div>
-
-            <div>&nbsp;</div>
-
-            <div class="form-group">
-                <label for="formFileLg" class="form-label text-white">Upload Photo</label>
-                <input class="form-control form-control-md text-white" id="formFileLg" name="photo" type="file" />
-            </div>
-
-            <div>&nbsp;</div>
-
-            <button type="submit" name="submit" class="register-button">
-                Add Book
-            </button>
-
-            <div>&nbsp;</div>
-        </form>
-        </form>
+                    for (Book book : books) { %>
+                            <tr>
+                                <td><%= book.getId() %></td>
+                                <td><img src="../books/<%= book.getPhoto() %>" style="width: 50px; height: 50px"></td>
+                                <td><%= book.getBook_name() %></td>
+                                <td><%= book.getAuthor() %></td>
+                                <td><%= book.getPrice() %></td>
+                                <td><%= book.getBook_category()%></td>
+                                <td><%= book.getStatus() %></td>
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-outline-warning">Edit</a>
+                                    <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
+                                </td>
+                            </tr>
+                    <%}
+                %>
+            </tbody>
+        </table>
     </div>
 </section>
 
@@ -158,7 +153,7 @@
         } else {
             localStorage.setItem("status", "open");
         }
-    })
+    });
 </script>
 </body>
 
