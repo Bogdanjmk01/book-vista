@@ -6,17 +6,13 @@ import com.bogdanjmk.book_vista.db.DatabaseConnection;
 import com.bogdanjmk.book_vista.entity.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             UserDAO userDAO = new UserDAOImpl(DatabaseConnection.getConnection());
@@ -25,27 +21,45 @@ public class LoginServlet extends HttpServlet {
 
             String email = req.getParameter("email");
             String password = req.getParameter("password");
+            boolean rememberMe = "on".equals(req.getParameter("remember_me"));
 
             if ("admin@gmail.com".equals(email) && "admin".equals(password)) {
                 User adminUser = new User();
+                adminUser.setName("Admin");
 
                 session.setAttribute("adminUser", adminUser);
+
+                if (rememberMe) {
+                    setRememberMeCookie(resp, "admin@gmail.com");
+                }
+
                 resp.sendRedirect("admin/home.jsp");
             } else {
                 User user = userDAO.loginUser(email, password);
 
                 if (user != null) {
                     session.setAttribute("userObj", user);
+
+                    if (rememberMe) {
+                        setRememberMeCookie(resp, email);
+                    }
+
                     resp.sendRedirect("home.jsp");
                 } else {
                     session.setAttribute("login_failed", "Email or password invalid!");
                     resp.sendRedirect("login.jsp");
                 }
-
-                resp.sendRedirect("home.jsp");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    private void setRememberMeCookie(HttpServletResponse resp, String email) {
+        Cookie rememberMeCookie = new Cookie("rememberMe", email);
+        rememberMeCookie.setMaxAge(30 * 24 * 60 * 60);
+        rememberMeCookie.setPath("/");
+        resp.addCookie(rememberMeCookie);
+    }
+
 }

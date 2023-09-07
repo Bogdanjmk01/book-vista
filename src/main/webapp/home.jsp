@@ -4,13 +4,14 @@
 <html>
 <head>
     <title>Title</title>
+    <%@include file="components/all_css.jsp" %>
 </head>
 <body>
 <h1>Home Page</h1>
+<%@include file="components/navbar.jsp" %>
 
-<c:if test="${not empty userObj}">
-    <h1>Name: ${userObj.name}</h1>
+<c:if test="${empty userObj}">
+    <c:redirect url="login.jsp" />
 </c:if>
-
 </body>
 </html>

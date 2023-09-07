@@ -16,9 +16,8 @@
 <body>
 <h1>Admin Page</h1>
 
-<c:if test="${not empty adminUser}">
-    <h1>Name: ${userObj.name}</h1>
-    <h1>Name: ${userObj.email}</h1>
+<c:if test="${empty adminUser}">
+    <c:redirect url="../login.jsp" />
 </c:if>
 
 <nav>
@@ -54,7 +53,7 @@
 
         <ul class="logout-mode">
             <li>
-                    <a href="../authentication/logout.php">
+                    <a href="../logout">
                         <i class="uil uil-signout"></i>
                         <span class="link-name">Logout</span>
                      </a>
