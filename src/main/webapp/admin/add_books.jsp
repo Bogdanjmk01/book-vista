@@ -74,6 +74,12 @@
 </nav>
 
 <section class="dashboard">
+
+    <c:if test="${not empty failed_message}">
+        <p class="text-center text-danger alert alert-danger w-100">${failed_message}</p>
+        <c:remove var="failed_message" scope="session" />
+    </c:if>
+
     <div class="login-box">
         <h2>Add Book</h2>
         <form method="post" action="../add_books" enctype='multipart/form-data'>
