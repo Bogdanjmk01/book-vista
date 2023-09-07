@@ -118,6 +118,18 @@
             <div>&nbsp;</div>
 
             <div class="form-group">
+                <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example" name="book_category">
+                    <% if ("NEW".equals(book.getBook_category())) { %>
+                    <option value="NEW">NEW</option>
+                    <option value="OLD">OLD</option>
+                    <% } else { %>
+                    <option value="OLD">OLD</option>
+                    <option value="NEW">NEW</option>
+                    <% } %>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example" name="status">
                     <% if ("Active".equals(book.getStatus())) { %>
                     <option value="Active">Active</option>

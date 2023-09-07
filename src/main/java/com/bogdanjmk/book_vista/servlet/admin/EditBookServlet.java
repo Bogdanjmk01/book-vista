@@ -23,6 +23,7 @@ public class EditBookServlet extends HttpServlet {
             String book_name = req.getParameter("book_name");
             String author = req.getParameter("author");
             Double price = Double.parseDouble(req.getParameter("price"));
+            String book_category = req.getParameter("book_category");
             String status = req.getParameter("status");
 
             Book book = new Book();
@@ -30,8 +31,8 @@ public class EditBookServlet extends HttpServlet {
             book.setBook_name(book_name);
             book.setAuthor(author);
             book.setPrice(price);
+            book.setBook_category(book_category);
             book.setStatus(status);
-            System.out.println(book.getStatus());
 
             BookDAO bookDAO = new BookDAOImpl(DatabaseConnection.getConnection());
             boolean updateBook = bookDAO.updateBook(book);
