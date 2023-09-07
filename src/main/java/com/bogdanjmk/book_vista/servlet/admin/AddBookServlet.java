@@ -44,7 +44,7 @@ public class AddBookServlet extends HttpServlet {
                 part.write(uploadDirectory + fileName);
 
                 session.setAttribute("success_message", "Book added successfully!");
-                resp.sendRedirect("admin/home.jsp");
+                resp.sendRedirect("admin/all_books.jsp");
             } else {
                 session.setAttribute("failed_message", "Could not add the book!");
                 resp.sendRedirect("admin/add_books.jsp");
