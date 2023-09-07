@@ -76,7 +76,7 @@
     </div>
 
     <div class="text-center mt-3 mb-2">
-        <a href="" class="btn btn-outline-info btn-lg">View All</a>
+        <a href="all_recent_books.jsp" class="btn btn-outline-primary btn-lg">View All</a>
     </div>
 </div>
 <!-- End of Recent Books Section -->
@@ -119,7 +119,7 @@
         </div>
 
         <div class="text-center mt-3 mb-2">
-            <a href="" class="btn btn-outline-primary btn-lg">View All</a>
+            <a href="all_new_books.jsp" class="btn btn-outline-primary btn-lg">View All</a>
         </div>
     </div>
 </div>
@@ -132,7 +132,7 @@
         <div class="row">
             <%
                 BookDAO bookDAO3 = new BookDAOImpl(DatabaseConnection.getConnection());
-                List<Book> oldBooks = bookDAO3.getNewBooks();
+                List<Book> oldBooks = bookDAO3.getOldBooks();
 
                 for (Book oldBook : oldBooks) {%>
                     <div class="col-md-3 card_hover">
@@ -161,7 +161,7 @@
         </div>
 
         <div class="text-center mt-3 mb-2">
-            <a href="" class="btn btn-outline-info btn-lg">View All</a>
+            <a href="all_old_books.jsp" class="btn btn-outline-primary btn-lg">View All</a>
         </div>
     </div>
 </div>

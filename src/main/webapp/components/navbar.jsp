@@ -60,13 +60,13 @@
                     <a class="nav-link active" aria-current="page" href="index.jsp"><i class="bi bi-house-fill"></i> Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#"><i class="bi bi-book-half"></i> Recent Book</a>
+                    <a class="nav-link active" href="all_recent_books.jsp"><i class="bi bi-book-half"></i> Recent Book</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#"><i class="bi bi-book-half"></i> New Book</a>
+                    <a class="nav-link active" href="all_new_books.jsp"><i class="bi bi-book-half"></i> New Book</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#"><i class="bi bi-book-half"></i> Old Book</a>
+                    <a class="nav-link active" href="all_old_books.jsp"><i class="bi bi-book-half"></i> Old Book</a>
                 </li>
             </ul>
 
