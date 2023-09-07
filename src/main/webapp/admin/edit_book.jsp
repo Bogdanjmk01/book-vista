@@ -25,6 +25,11 @@
 </head>
 
 <body>
+
+<c:if test="${empty adminUser}">
+    <c:redirect url="../login.jsp" />
+</c:if>
+
 <nav>
     <div class="logo-name">
         <div class="logo-image">
@@ -58,10 +63,12 @@
         </ul>
 
         <ul class="logout-mode">
-            <li><a href="../authentication/logout.php">
-                <i class="uil uil-signout"></i>
-                <span class="link-name">Logout</span>
-            </a></li>
+            <li>
+                <a href="../logout">
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name">Logout</span>
+                </a>
+            </li>
 
             <li class="mode">
                 <a href="#">
