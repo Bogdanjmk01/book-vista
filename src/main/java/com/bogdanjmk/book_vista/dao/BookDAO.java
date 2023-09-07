@@ -10,4 +10,7 @@ public interface BookDAO {
     Book getBookById(Long id);
     boolean updateBook(Book book);
     boolean deleteBook(Long id);
+    List<Book> getNewBooks();
+    List<Book> getRecentBooks();
+    List<Book> getOldBooks();
 }

@@ -57,7 +57,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-house-fill"></i> Home</a>
+                    <a class="nav-link active" aria-current="page" href="index.jsp"><i class="bi bi-house-fill"></i> Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="#"><i class="bi bi-book-half"></i> Recent Book</a>

@@ -117,15 +117,16 @@ public class BookDAOImpl implements BookDAO {
 
         try {
             String sql = """
-                    UPDATE books SET book_name = ?, author = ?, price = ?, status = ? WHERE id = ?;
+                    UPDATE books SET book_name = ?, author = ?, price = ?, book_category = ?, status = ? WHERE id = ?;
                     """;
 
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, book.getBook_name());
             ps.setString(2, book.getAuthor());
             ps.setDouble(3, book.getPrice());
-            ps.setString(4, book.getStatus());
-            ps.setLong(5, book.getId());
+            ps.setString(4, book.getBook_category());
+            ps.setString(5, book.getStatus());
+            ps.setLong(6, book.getId());
 
             int i = ps.executeUpdate();
 
@@ -160,5 +161,121 @@ public class BookDAOImpl implements BookDAO {
         }
 
         return f;
+    }
+
+    @Override
+    public List<Book> getNewBooks() {
+        List<Book> newBooks = new ArrayList<>();
+        Book book;
+
+        try {
+            String sql = """
+                    SELECT * FROM books WHERE book_category = ? AND status = ? ORDER BY id DESC;
+                    """;
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "NEW");
+            ps.setString(2, "ACTIVE");
+
+            ResultSet rs = ps.executeQuery();
+            int i = 1;
+
+            while (rs.next() && i <= 5) {
+                book = new Book();
+
+                book.setId(rs.getLong("id"));
+                book.setBook_name(rs.getString("book_name"));
+                book.setAuthor(rs.getString("author"));
+                book.setPrice(rs.getDouble("price"));
+                book.setBook_category(rs.getString("book_category"));
+                book.setStatus(rs.getString("status"));
+                book.setPhoto(rs.getString("photo"));
+                book.setEmail(rs.getString("email"));
+
+                newBooks.add(book);
+                i ++;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return newBooks;
+    }
+
+    @Override
+    public List<Book> getRecentBooks() {
+        List<Book> recentBooks = new ArrayList<>();
+        Book book;
+
+        try {
+            String sql = """
+                    SELECT * FROM books WHERE status = ? ORDER BY id DESC;
+                    """;
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "ACTIVE");
+
+            ResultSet rs = ps.executeQuery();
+            int i = 1;
+
+            while (rs.next() && i <= 5) {
+                book = new Book();
+
+                book.setId(rs.getLong("id"));
+                book.setBook_name(rs.getString("book_name"));
+                book.setAuthor(rs.getString("author"));
+                book.setPrice(rs.getDouble("price"));
+                book.setBook_category(rs.getString("book_category"));
+                book.setStatus(rs.getString("status"));
+                book.setPhoto(rs.getString("photo"));
+                book.setEmail(rs.getString("email"));
+
+                recentBooks.add(book);
+                i ++;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return recentBooks;
+    }
+
+    @Override
+    public List<Book> getOldBooks() {
+        List<Book> oldBooks = new ArrayList<>();
+        Book book;
+
+        try {
+            String sql = """
+                    SELECT * FROM books WHERE book_category = ? AND status = ? ORDER BY id DESC;
+                    """;
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "OLD");
+            ps.setString(2, "ACTIVE");
+
+            ResultSet rs = ps.executeQuery();
+            int i = 1;
+
+            while (rs.next() && i <= 5) {
+                book = new Book();
+
+                book.setId(rs.getLong("id"));
+                book.setBook_name(rs.getString("book_name"));
+                book.setAuthor(rs.getString("author"));
+                book.setPrice(rs.getDouble("price"));
+                book.setBook_category(rs.getString("book_category"));
+                book.setStatus(rs.getString("status"));
+                book.setPhoto(rs.getString("photo"));
+                book.setEmail(rs.getString("email"));
+
+                oldBooks.add(book);
+                i ++;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return oldBooks;
     }
 }

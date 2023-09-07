@@ -1,5 +1,8 @@
 <%@ page import="com.bogdanjmk.book_vista.db.DatabaseConnection" %>
-<%@ page import="java.sql.Connection" %>
+<%@ page import="com.bogdanjmk.book_vista.dao.BookDAO" %>
+<%@ page import="com.bogdanjmk.book_vista.dao.impl.BookDAOImpl" %>
+<%@ page import="com.bogdanjmk.book_vista.entity.Book" %>
+<%@ page import="java.util.List" %>
 <html>
 <head>
     <meta charset="ISO-8859-1">
@@ -31,79 +34,49 @@
     <h3 class="text-center mt-2">Recent Books</h3>
     <div class="container card" style="margin-top: 50px; justify-content: space-around">
         <div class="row">
-            <div class="col-md-3 card_hover">
-                <div class="card-sl m-3">
-                    <div class="card-image">
-                        <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-                    </div>
-                    <a class="card-action" href="#"><i class="fa fa-heart"></i></a>
-                    <div class="card-heading">
-                        Audi Q8
-                    </div>
-                    <div class="card-text">
-                        Audi Q8 is a full-size luxury crossover SUV coupé made by Audi that was launched in 2018.
-                    </div>
-                    <div class="card-text">
-                        $67,400
-                    </div>
-                    <div style="display: flex; flex-direction: row; gap: 10px">
-                        <button href="#" class="card-button"> Purchase</button>
-                        <button href="#" class="card-button"> View Details</button>
-                        <button href="#" class="card-button"> 299</button>
-                    </div>
-                </div>
-            </div>
+            <%
+                BookDAO bookDAO = new BookDAOImpl(DatabaseConnection.getConnection());
+                List<Book> recentBooks = bookDAO.getRecentBooks();
 
+                for (Book recentBook : recentBooks) {
+            %>
             <div class="col-md-3 card_hover">
                 <div class="card-sl m-3">
                     <div class="card-image">
-                        <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                        <img src="books/<%= recentBook.getPhoto() %>" style="width: 150px; height: 200px" />
                     </div>
                     <a class="card-action" href="#"><i class="fa fa-heart"></i></a>
                     <div class="card-heading">
-                        Audi Q8
+                        <%= recentBook.getBook_name() %>
                     </div>
                     <div class="card-text">
-                        Audi Q8 is a full-size luxury crossover SUV coupé made by Audi that was launched in 2018.
+                        Author:  <%= recentBook.getAuthor() %>
                     </div>
                     <div class="card-text">
-                        $67,400
+                        Category:  <%= recentBook.getBook_category() %>
                     </div>
-                    <div style="display: flex; flex-direction: row; gap: 10px">
-                        <button href="#" class="card-button"> Purchase</button>
-                        <button href="#" class="card-button"> View Details</button>
-                        <button href="#" class="card-button"> 299</button>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-md-3 card_hover">
-                <div class="card-sl m-3">
-                    <div class="card-image">
-                        <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-                    </div>
-                    <a class="card-action" href="#"><i class="fa fa-heart"></i></a>
-                    <div class="card-heading">
-                        Audi Q8
-                    </div>
-                    <div class="card-text">
-                        Audi Q8 is a full-size luxury crossover SUV coupé made by Audi that was launched in 2018.
-                    </div>
-                    <div class="card-text">
-                        $67,400
-                    </div>
                     <div style="display: flex; flex-direction: row; gap: 10px">
-                        <button href="#" class="card-button"> Purchase</button>
-                        <button href="#" class="card-button"> View Details</button>
-                        <button href="#" class="card-button"> 299</button>
+                        <% if (recentBook.getBook_category().equals("OLD")) { %>
+                            <a href="#" class="card-button"> View Details</a>
+                            <a href="#" class="card-button"><i class="bi bi-currency-euro" style="margin-top: 3px;"></i>  <%= recentBook.getPrice() %></a>
+                        <% } else { %>
+                            <a href="#" class="card-button"> Purchase</a>
+                            <a href="#" class="card-button"> View Details</a>
+                            <a href="#" class="card-button"><i class="bi bi-currency-euro" style="margin-top: 3px;"></i>  <%= recentBook.getPrice() %></a>
+                        <% }
+                        %>
                     </div>
                 </div>
             </div>
+            <%
+                }
+            %>
         </div>
+    </div>
 
-        <div class="text-center mt-3 mb-2">
-            <a href="" class="btn btn-outline-info btn-lg">View All</a>
-        </div>
+    <div class="text-center mt-3 mb-2">
+        <a href="" class="btn btn-outline-info btn-lg">View All</a>
     </div>
 </div>
 <!-- End of Recent Books Section -->
@@ -113,78 +86,40 @@
     <h3 class="text-center mt-5">New Books</h3>
     <div class="container card" style="margin-top: 50px; justify-content: space-evenly;">
         <div class="row">
-            <div class="col-md-3 card_hover">
-                <div class="card-sl m-3">
-                    <div class="card-image">
-                        <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-                    </div>
-                    <a class="card-action" href="#"><i class="fa fa-heart"></i></a>
-                    <div class="card-heading">
-                        Audi Q8
-                    </div>
-                    <div class="card-text">
-                        Audi Q8 is a full-size luxury crossover SUV coupé made by Audi that was launched in 2018.
-                    </div>
-                    <div class="card-text">
-                        $67,400
-                    </div>
-                    <div style="display: flex; flex-direction: row; gap: 10px">
-                        <button href="#" class="card-button"> Purchase</button>
-                        <button href="#" class="card-button"> View Details</button>
-                        <button href="#" class="card-button"> 299</button>
-                    </div>
-                </div>
-            </div>
+            <%
+                BookDAO bookDAO2 = new BookDAOImpl(DatabaseConnection.getConnection());
+                List<Book> newBooks = bookDAO2.getNewBooks();
 
-            <div class="col-md-3 card_hover">
-                <div class="card-sl m-3">
-                    <div class="card-image">
-                        <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                for (Book newBook : newBooks) {%>
+                    <div class="col-md-3 card_hover">
+                        <div class="card-sl m-3">
+                            <div class="card-image">
+                                <img src="books/<%= newBook.getPhoto() %>" style="width: 150px; height: 200px" />
+                            </div>
+                            <a class="card-action" href="#"><i class="fa fa-heart"></i></a>
+                            <div class="card-heading">
+                                <%= newBook.getBook_name() %>
+                            </div>
+                            <div class="card-text">
+                               Author:  <%= newBook.getAuthor() %>
+                            </div>
+                            <div class="card-text">
+                               Category:  <%= newBook.getBook_category() %>
+                            </div>
+                            <div style="display: flex; flex-direction: row; gap: 10px">
+                                <a href="#" class="card-button"> Purchase</a>
+                                <a href="#" class="card-button"> View Details</a>
+                                <a href="#" class="card-button"><i class="bi bi-currency-euro" style="margin-top: 3px;"></i>  <%= newBook.getPrice() %></a>
+                            </div>
+                        </div>
                     </div>
-                    <a class="card-action" href="#"><i class="fa fa-heart"></i></a>
-                    <div class="card-heading">
-                        Audi Q8
-                    </div>
-                    <div class="card-text">
-                        Audi Q8 is a full-size luxury crossover SUV coupé made by Audi that was launched in 2018.
-                    </div>
-                    <div class="card-text">
-                        $67,400
-                    </div>
-                    <div style="display: flex; flex-direction: row; gap: 10px">
-                        <button href="#" class="card-button"> Purchase</button>
-                        <button href="#" class="card-button"> View Details</button>
-                        <button href="#" class="card-button"> 299</button>
-                    </div>
-                </div>
-            </div>
+                <%}
+            %>
 
-            <div class="col-md-3 card_hover">
-                <div class="card-sl m-3">
-                    <div class="card-image">
-                        <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-                    </div>
-                    <a class="card-action" href="#"><i class="fa fa-heart"></i></a>
-                    <div class="card-heading">
-                        Audi Q8
-                    </div>
-                    <div class="card-text">
-                        Audi Q8 is a full-size luxury crossover SUV coupé made by Audi that was launched in 2018.
-                    </div>
-                    <div class="card-text">
-                        $67,400
-                    </div>
-                    <div style="display: flex; flex-direction: row; gap: 10px">
-                        <button href="#" class="card-button"> Purchase</button>
-                        <button href="#" class="card-button"> View Details</button>
-                        <button href="#" class="card-button"> 299</button>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="text-center mt-3 mb-2">
-            <a href="" class="btn btn-outline-info btn-lg">View All</a>
+            <a href="" class="btn btn-outline-primary btn-lg">View All</a>
         </div>
     </div>
 </div>
@@ -195,71 +130,34 @@
     <h3 class="text-center mt-5">Old Books</h3>
     <div class="container card" style="margin-top: 50px; justify-content: space-evenly">
         <div class="row">
-            <div class="col-md-3 card_hover">
-                <div class="card-sl m-3">
-                    <div class="card-image">
-                        <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-                    </div>
-                    <a class="card-action" href="#"><i class="fa fa-heart"></i></a>
-                    <div class="card-heading">
-                        Audi Q8
-                    </div>
-                    <div class="card-text">
-                        Audi Q8 is a full-size luxury crossover SUV coupé made by Audi that was launched in 2018.
-                    </div>
-                    <div class="card-text">
-                        $67,400
-                    </div>
-                    <div style="display: flex; flex-direction: row; gap: 10px">
-                        <button href="#" class="card-button"> View Details</button>
-                        <button href="#" class="card-button"> 299</button>
-                    </div>
-                </div>
-            </div>
+            <%
+                BookDAO bookDAO3 = new BookDAOImpl(DatabaseConnection.getConnection());
+                List<Book> oldBooks = bookDAO3.getNewBooks();
 
-            <div class="col-md-3 card_hover">
-                <div class="card-sl m-3">
-                    <div class="card-image">
-                        <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                for (Book oldBook : oldBooks) {%>
+                    <div class="col-md-3 card_hover">
+                        <div class="card-sl m-3">
+                            <div class="card-image">
+                                <img src="books/<%= oldBook.getPhoto() %>" style="width: 150px; height: 200px" />
+                            </div>
+                            <a class="card-action" href="#"><i class="fa fa-heart"></i></a>
+                            <div class="card-heading">
+                                <%= oldBook.getBook_name() %>
+                            </div>
+                            <div class="card-text">
+                                Author:  <%= oldBook.getAuthor() %>
+                            </div>
+                            <div class="card-text">
+                                Category:  <%= oldBook.getBook_category() %>
+                            </div>
+                            <div style="display: flex; flex-direction: row; gap: 10px">
+                                <a href="#" class="card-button"> View Details</a>
+                                <a href="#" class="card-button"><i class="bi bi-currency-euro" style="margin-top: 3px;"></i>  <%= oldBook.getPrice() %></a>
+                            </div>
+                        </div>
                     </div>
-                    <a class="card-action" href="#"><i class="fa fa-heart"></i></a>
-                    <div class="card-heading">
-                        Audi Q8
-                    </div>
-                    <div class="card-text">
-                        Audi Q8 is a full-size luxury crossover SUV coupé made by Audi that was launched in 2018.
-                    </div>
-                    <div class="card-text">
-                        $67,400
-                    </div>
-                    <div style="display: flex; flex-direction: row; gap: 10px">
-                        <button href="#" class="card-button"> View Details</button>
-                        <button href="#" class="card-button"> 299</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 card_hover">
-                <div class="card-sl m-3">
-                    <div class="card-image">
-                        <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-                    </div>
-                    <a class="card-action" href="#"><i class="fa fa-heart"></i></a>
-                    <div class="card-heading">
-                        Audi Q8
-                    </div>
-                    <div class="card-text">
-                        Audi Q8 is a full-size luxury crossover SUV coupé made by Audi that was launched in 2018.
-                    </div>
-                    <div class="card-text">
-                        $67,400
-                    </div>
-                    <div style="display: flex; flex-direction: row; gap: 10px">
-                        <button href="#" class="card-button"> View Details</button>
-                        <button href="#" class="card-button"> 299</button>
-                    </div>
-                </div>
-            </div>
+                    <%}
+                    %>
         </div>
 
         <div class="text-center mt-3 mb-2">
