@@ -7,4 +7,6 @@ import java.util.List;
 public interface BookDAO {
     boolean addBook(Book book);
     List<Book> getAllBooks();
+    Book getBookById(Long id);
+    boolean updateBook(Book book);
 }
