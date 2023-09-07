@@ -58,11 +58,11 @@
 
                     <div style="display: flex; flex-direction: row; gap: 10px">
                         <% if (recentBook.getBook_category().equals("OLD")) { %>
-                            <a href="#" class="card-button"> View Details</a>
+                            <a href="view_books.jsp?id=<%= recentBook.getId() %>" class="card-button"> View Details</a>
                             <a href="#" class="card-button"><i class="bi bi-currency-euro" style="margin-top: 3px;"></i>  <%= recentBook.getPrice() %></a>
                         <% } else { %>
                             <a href="#" class="card-button"> Purchase</a>
-                            <a href="#" class="card-button"> View Details</a>
+                            <a href="view_books.jsp?id=<%= recentBook.getId() %>" class="card-button"> View Details</a>
                             <a href="#" class="card-button"><i class="bi bi-currency-euro" style="margin-top: 3px;"></i>  <%= recentBook.getPrice() %></a>
                         <% }
                         %>
@@ -108,7 +108,7 @@
                             </div>
                             <div style="display: flex; flex-direction: row; gap: 10px">
                                 <a href="#" class="card-button"> Purchase</a>
-                                <a href="#" class="card-button"> View Details</a>
+                                <a href="view_books.jsp?id=<%= newBook.getId() %>" class="card-button"> View Details</a>
                                 <a href="#" class="card-button"><i class="bi bi-currency-euro" style="margin-top: 3px;"></i>  <%= newBook.getPrice() %></a>
                             </div>
                         </div>
@@ -151,7 +151,7 @@
                                 Category:  <%= oldBook.getBook_category() %>
                             </div>
                             <div style="display: flex; flex-direction: row; gap: 10px">
-                                <a href="#" class="card-button"> View Details</a>
+                                <a href="view_books.jsp?id=<%= oldBook.getId() %>" class="card-button"> View Details</a>
                                 <a href="#" class="card-button"><i class="bi bi-currency-euro" style="margin-top: 3px;"></i>  <%= oldBook.getPrice() %></a>
                             </div>
                         </div>
