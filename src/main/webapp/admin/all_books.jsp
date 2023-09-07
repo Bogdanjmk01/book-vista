@@ -82,13 +82,23 @@
     <div class="table-container">
 
         <c:if test="${not empty success_message}">
-            <p class="text-center text-success alert alert-success w-50">${success_message}</p>
+            <p class="text-center text-success alert alert-success w-100">${success_message}</p>
             <c:remove var="success_message" scope="session" />
         </c:if>
 
         <c:if test="${not empty update_success}">
-            <p class="text-center text-success alert alert-success w-50">${update_success}</p>
+            <p class="text-center text-success alert alert-success w-100">${update_success}</p>
             <c:remove var="update_success" scope="session" />
+        </c:if>
+
+        <c:if test="${not empty delete_success}">
+            <p class="text-center text-success alert alert-success w-100">${delete_success}</p>
+            <c:remove var="delete_success" scope="session" />
+        </c:if>
+
+        <c:if test="${not empty delete_failed}">
+            <p class="text-center text-warning alert alert-warning w-100">${delete_failed}</p>
+            <c:remove var="delete_failed" scope="session" />
         </c:if>
 
         <h2 style="color: #a49c9c">Books</h2>
@@ -121,8 +131,8 @@
                                 <td><%= book.getBook_category()%></td>
                                 <td><%= book.getStatus() %></td>
                                 <td class="gap-2">
-                                    <a href="edit_book.jsp?id=<%= book.getId() %>" class="btn btn-sm btn-outline-warning">Edit</a>
-                                    <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
+                                    <a href="edit_book.jsp?id=<%= book.getId() %>" class="btn btn-sm btn-outline-dark">Edit</a>
+                                    <a href="../delete_book?id=<%= book.getId() %>" class="btn btn-sm btn-outline-danger">Delete</a>
                                 </td>
                             </tr>
                     <%}

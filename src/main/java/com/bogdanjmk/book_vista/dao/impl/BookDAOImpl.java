@@ -138,4 +138,27 @@ public class BookDAOImpl implements BookDAO {
 
         return f;
     }
+
+    @Override
+    public boolean deleteBook(Long id) {
+        boolean f = false;
+
+        try {
+            String sql = """
+                    DELETE FROM books WHERE id = ?;
+                    """;
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setLong(1, id);
+            int i = ps.executeUpdate();
+
+            if (i == 1) {
+                f = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return f;
+    }
 }
