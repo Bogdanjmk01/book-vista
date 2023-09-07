@@ -34,9 +34,14 @@ public class AddBookServlet extends HttpServlet {
             HttpSession session = req.getSession();
 
             if (f) {
-                String path = getServletContext().getRealPath("") + "books";
-                File file = new File(path);
-                part.write(path + File.separator + fileName);
+                String uploadDirectory = "C:\\Users\\bmocanu\\IdeaProjects\\book-vista\\src\\main\\webapp\\books\\";
+
+                File directory = new File(uploadDirectory);
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+
+                part.write(uploadDirectory + fileName);
 
                 session.setAttribute("success_message", "Book added successfully!");
                 resp.sendRedirect("admin/home.jsp");

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page isELIgnored="false" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,7 +91,7 @@
             </div>
 
             <div class="form-group">
-                <select name="book_category">
+                <select name="book_category" class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
                     <option selected>--Select--</option>
                     <option value="Inactive">New Book</option>
                 </select>
@@ -99,7 +100,7 @@
             <div>&nbsp;</div>
 
             <div class="form-group">
-                <select name="status">
+                <select class="form-select form-select-md mb-3" name="status" aria-label=".form-select-lg example">
                     <option selected>--Select--</option>
                     <option value="Active">Active</option>
                     <option value="Inactive">Inactive</option>
@@ -109,22 +110,25 @@
             <div>&nbsp;</div>
 
             <div class="form-group">
-                <label>Upload Photo</label>
-                <input type="file" name="photo" class="form-control-file">
+                <label for="formFileLg" class="form-label text-white">Upload Photo</label>
+                <input class="form-control form-control-md text-white" id="formFileLg" name="photo" type="file" />
             </div>
 
+            <div>&nbsp;</div>
+
             <button type="submit" name="submit" class="register-button">
-                Add Train
+                Add Book
             </button>
 
             <div>&nbsp;</div>
+        </form>
         </form>
     </div>
 </section>
 
 <script>
     const body = document.querySelector("body"),
-        modeToggle = body.querySelector(".mode-toggle");
+    modeToggle = body.querySelector(".mode-toggle");
     sidebar = body.querySelector("nav");
     sidebarToggle = body.querySelector(".sidebar-toggle");
 
