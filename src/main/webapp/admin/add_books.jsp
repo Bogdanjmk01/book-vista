@@ -135,7 +135,6 @@
 
             <div>&nbsp;</div>
         </form>
-        </form>
     </div>
 </section>
 
