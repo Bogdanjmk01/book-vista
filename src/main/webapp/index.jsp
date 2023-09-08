@@ -3,6 +3,7 @@
 <%@ page import="com.bogdanjmk.book_vista.dao.impl.BookDAOImpl" %>
 <%@ page import="com.bogdanjmk.book_vista.entity.Book" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.bogdanjmk.book_vista.entity.User" %>
 <html>
 <head>
     <meta charset="ISO-8859-1">
@@ -24,6 +25,10 @@
 </head>
 <body style="background-color: #f7f7f7">
 <%@include file="components/navbar.jsp" %>
+
+<%
+    User user = (User) session.getAttribute("userObj");
+%>
 
 <div class="back-img">
     <h1 class="text-center"><b><i class="bi bi-book-fill"></i> Welcome to Book Vista</b></h1>
@@ -61,7 +66,15 @@
                             <a href="view_books.jsp?id=<%= recentBook.getId() %>" class="card-button"> View Details</a>
                             <a href="#" class="card-button"><i class="bi bi-currency-euro" style="margin-top: 3px;"></i>  <%= recentBook.getPrice() %></a>
                         <% } else { %>
-                            <a href="#" class="card-button"> Purchase</a>
+                                <%
+                                if (user == null) { %>
+                                    <a href="login.jsp" class="card-button"> Purchase</a>
+                                <%
+                                } else {%>
+                                    <a href="cart?bookId=<%= recentBook.getId() %>&&userId=<%= user.getId() %>" class="card-button"> Purchase</a>
+                                <%
+                                    }
+                                %>
                             <a href="view_books.jsp?id=<%= recentBook.getId() %>" class="card-button"> View Details</a>
                             <a href="#" class="card-button"><i class="bi bi-currency-euro" style="margin-top: 3px;"></i>  <%= recentBook.getPrice() %></a>
                         <% }
@@ -107,7 +120,15 @@
                                Category:  <%= newBook.getBook_category() %>
                             </div>
                             <div style="display: flex; flex-direction: row; gap: 10px">
-                                <a href="#" class="card-button"> Purchase</a>
+                                <%
+                                    if (user == null) { %>
+                                        <a href="login.jsp" class="card-button"> Purchase</a>
+                                <%
+                                    } else {%>
+                                        <a href="cart?bookId=<%= newBook.getId() %>&&userId=<%= user.getId() %>" class="card-button"> Purchase</a>
+                                <%
+                                    }
+                                %>
                                 <a href="view_books.jsp?id=<%= newBook.getId() %>" class="card-button"> View Details</a>
                                 <a href="#" class="card-button"><i class="bi bi-currency-euro" style="margin-top: 3px;"></i>  <%= newBook.getPrice() %></a>
                             </div>
