@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
                         setRememberMeCookie(resp, email);
                     }
 
-                    resp.sendRedirect("home.jsp");
+                    resp.sendRedirect("index.jsp");
                 } else {
                     session.setAttribute("login_failed", "Email or password invalid!");
                     resp.sendRedirect("login.jsp");

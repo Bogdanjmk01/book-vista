@@ -18,6 +18,7 @@
 
         <div class="col-md-3">
             <c:if test="${not empty userObj}">
+                <a class="cart-button" href="cart.jsp"><i class="bi bi-cart-check-fill"></i></a>
                 <button class="btn btn-outline-success" disabled style="pointer-events: none">${userObj.name}</button>
                 <a class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-arrow-right-to-bracket mt-1"></i> Logout</a>
             </c:if>
@@ -71,7 +72,7 @@
             </ul>
 
             <form class="d-flex mt-3" role="search">
-                <button class="btn btn-outline-light" type="submit"><i class="bi bi-gear"></i>&nbsp; About</button>
+                <button class="btn btn-outline-light" type="submit"><i class="bi bi-gear"></i>&nbsp; Settings</button>
                 <span>&nbsp;</span>
                 <button class="btn btn-outline-light" type="submit"><i class="bi bi-telephone-forward"></i> &nbsp; Contact Us</button>
             </form>
