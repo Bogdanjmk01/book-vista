@@ -14,7 +14,7 @@
             </div>
             <h2>24/7 Service Help</h2>
             <h4>Help Line Number</h4>
-            <h5>+40 727 8000 10</h5>
+            <h5>+Your phone number</h5>
             <a href="settings.jsp" class="btn btn-outline-secondary">Home</a>
         </div>
     </div>
