@@ -19,7 +19,7 @@ public class UserDAOImpl implements UserDAO {
 
         try {
             String sql = """
-                        INSERT INTO users(name, email, phone_number, password) VALUES(?, ?, ?, ?);
+                    INSERT INTO users(name, email, phone_number, password) VALUES(?, ?, ?, ?);
                     """;
 
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -46,7 +46,7 @@ public class UserDAOImpl implements UserDAO {
 
         try {
             String sql = """
-                     SELECT * FROM users WHERE email = ? AND password = ?;
+                    SELECT * FROM users WHERE email = ? AND password = ?;
                     """;
 
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -72,5 +72,58 @@ public class UserDAOImpl implements UserDAO {
         }
 
         return loggedInUser;
+    }
+
+    @Override
+    public boolean checkPassword(Long userId, String password) {
+        boolean f = false;
+
+        try {
+            String sql = """
+                    SELECT * FROM users WHERE id = ? AND password = ?;
+                    """;
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setLong(1, userId);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                f = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return f;
+    }
+
+    @Override
+    public boolean updateProfile(User user) {
+        boolean f = false;
+
+        try {
+            String sql = """
+                    UPDATE users SET name = ?, email = ?, phone_number = ? WHERE id = ?;
+                    """;
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPhone_number());
+            ps.setLong(4, user.getId());
+
+            int i  = ps.executeUpdate();
+
+            if (i == 1) {
+                f = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return f;
     }
 }

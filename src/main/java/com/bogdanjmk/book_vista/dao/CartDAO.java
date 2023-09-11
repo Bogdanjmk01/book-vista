@@ -8,5 +8,5 @@ public interface CartDAO {
     boolean addToCart(Cart cart);
     List<Cart> getCartByUserId(Long userId);
     Integer getNumberOfItemsInTheCart(Long userId);
-    boolean deleteBook(Long bookId, Long userId);
+    boolean deleteBook(Long bookId, Long userId, Long cartId);
 }

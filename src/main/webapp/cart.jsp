@@ -196,7 +196,7 @@
                                         <div class="row text-muted"><%= cart.getAuthor() %></div>
                                         <div class="row"> <%= cart.getBookName() %></div>
                                     </div>
-                                    <div class="col">&euro; <%= cart.getPrice() %> <a href="remove_book?bookId=<%= cart.getBookId() %>&&userId=<%= cart.getUserId() %>" class="close fs-5">&#10005;</a></div>
+                                    <div class="col">&euro; <%= cart.getPrice() %> <a href="remove_book?bookId=<%= cart.getBookId() %>&&userId=<%= cart.getUserId() %>&&cartId=<%= cart.getId() %>" class="close fs-5">&#10005;</a></div>
                                 </div>
                             </div>
 

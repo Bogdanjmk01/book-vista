@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page isELIgnored="false" %>
 <html>
 <head>
     <title>Edit Profile</title>
@@ -53,10 +55,10 @@
 
         .login-box .user-box input:focus~label,
         .login-box .user-box input:valid~label {
-            top: -20px;
+            top: -13px;
             left: 0;
             color: #fafafa;
-            font-size: 12px;
+            font-size: 10px;
         }
 
         .login-link {
@@ -155,28 +157,44 @@
     </style>
 </head>
 <body>
+
+<c:if test="${empty userObj}">
+    <c:redirect url="login.jsp" />
+</c:if>
+
 <%@include file="components/navbar.jsp" %>
+
+<c:if test="${not empty success_message}">
+    <p class="text-center text-success alert alert-success w-100"><b>${success_message}</b></p>
+    <c:remove var="success_message" scope="session" />
+</c:if>
+
+<c:if test="${not empty failed_message}">
+    <p class="text-center text-danger alert alert-danger w-100"><b>${failed_message}</b></p>
+    <c:remove var="failed_message" scope="session" />
+</c:if>
 
 <div class="login-box">
     <h2>Edit Profile</h2>
-    <form method="post" action="../add_books" enctype='multipart/form-data'>
+    <form method="post" action="update_profile">
+        <input type="hidden" name="userId" value="${userObj.id}">
         <div class="user-box">
-            <input type="text" name="book_name" required="">
+            <input type="text" name="name" required value="${userObj.name}">
             <label>Enter Your Full Name</label>
         </div>
 
         <div class="user-box">
-            <input type="text" name="author" required="">
+            <input type="text" name="email" required value="${userObj.email}">
             <label>Email</label>
         </div>
 
         <div class="user-box">
-            <input type="text" name="price" required="">
+            <input type="text" name="phone_number" required value="${userObj.phone_number}">
             <label>Phone Number</label>
         </div>
 
         <div class="user-box">
-            <input type="text" name="price" required="">
+            <input type="password" name="password">
             <label>Password</label>
         </div>
 

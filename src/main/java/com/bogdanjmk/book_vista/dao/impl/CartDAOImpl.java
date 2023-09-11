@@ -108,17 +108,18 @@ public class CartDAOImpl implements CartDAO {
     }
 
     @Override
-    public boolean deleteBook(Long bookId, Long userId) {
+    public boolean deleteBook(Long bookId, Long userId, Long cartId) {
         boolean f = false;
 
         try {
             String sql = """
-                    DELETE FROM cart WHERE book_id = ? AND user_id = ?;
+                    DELETE FROM cart WHERE book_id = ? AND user_id = ? AND id = ?;
                     """;
 
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setLong(1, bookId);
             ps.setLong(2, userId);
+            ps.setLong(3, cartId);
 
             int i = ps.executeUpdate();
 
