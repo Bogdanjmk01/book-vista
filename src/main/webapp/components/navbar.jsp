@@ -72,9 +72,9 @@
             </ul>
 
             <form class="d-flex mt-3" role="search">
-                <button class="btn btn-outline-light" type="submit"><i class="bi bi-gear"></i>&nbsp; Settings</button>
+                <a href="settings.jsp" class="btn btn-outline-light" type="submit"><i class="bi bi-gear"></i>&nbsp; Settings</a>
                 <span>&nbsp;</span>
-                <button class="btn btn-outline-light" type="submit"><i class="bi bi-telephone-forward"></i> &nbsp; Contact Us</button>
+                <a href="#" class="btn btn-outline-light" type="submit"><i class="bi bi-telephone-forward"></i> &nbsp; Contact Us</a>
             </form>
         </div>
     </div>
