@@ -10,8 +10,8 @@
         </div>
 
         <div class="col-md-6">
-            <form class="d-flex" role="search">
-                <input class="form-control me-1 w-50" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" role="search" action="search.jsp" method="post">
+                <input class="form-control me-1 w-50" type="search" placeholder="Search" name="searchBook" aria-label="Search">
                 <button class="btn btn-outline-dark" type="submit">Search</button>
             </form>
         </div>

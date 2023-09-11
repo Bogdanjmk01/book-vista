@@ -388,4 +388,43 @@ public class BookDAOImpl implements BookDAO {
 
         return oldBooks;
     }
+
+    @Override
+    public List<Book> searchBook(String name) {
+        List<Book> books = new ArrayList<>();
+        Book book;
+
+        try {
+            String sql = """
+                    SELECT * FROM books WHERE book_name LIKE ? OR book_category LIKE ? OR author LIKE ? AND status = ?;
+                    """;
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + name + "%");
+            ps.setString(2, "%" + name + "%");
+            ps.setString(3, "%" + name + "%");
+            ps.setString(4, "ACTIVE");
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                book = new Book();
+
+                book.setId(rs.getLong("id"));
+                book.setBook_name(rs.getString("book_name"));
+                book.setAuthor(rs.getString("author"));
+                book.setPrice(rs.getDouble("price"));
+                book.setBook_category(rs.getString("book_category"));
+                book.setStatus(rs.getString("status"));
+                book.setPhoto(rs.getString("photo"));
+                book.setEmail(rs.getString("email"));
+
+                books.add(book);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return books;
+    }
 }

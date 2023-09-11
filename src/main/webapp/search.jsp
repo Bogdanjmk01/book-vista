@@ -7,20 +7,21 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Recent Books</title>
+    <title>Books</title>
     <%@include file="components/all_css.jsp"%>
 </head>
 <body>
 <%@include file="components/navbar.jsp"%>
-<h3 class="text-center mt-2">Recent Books</h3>
+<h3 class="text-center mt-2">Books</h3>
 <div style="justify-content: space-around">
     <div class="row">
         <%
             User user = (User) session.getAttribute("userObj");
+            String name = request.getParameter("searchBook");
             BookDAO bookDAO = new BookDAOImpl(DatabaseConnection.getConnection());
-            List<Book> recentBooks = bookDAO.getAllRecentBooks();
+            List<Book> books = bookDAO.searchBook(name);
 
-            for (Book recentBook : recentBooks) {
+            for (Book recentBook : books) {
         %>
         <div class="col-md-3 card_hover card w-25">
             <div class="card-sl m-3">
@@ -40,7 +41,7 @@
 
                 <div style="display: flex; flex-direction: row; gap: 10px">
                     <% if (recentBook.getBook_category().equals("OLD")) { %>
-                    <a href="#" class="card-button"> View Details</a>
+                    <a href="view_books.jsp?id=<%= recentBook.getId() %>" class="card-button"> View Details</a>
                     <a href="#" class="card-button"><i class="bi bi-currency-euro" style="margin-top: 3px;"></i>  <%= recentBook.getPrice() %></a>
                     <% } else { %>
                     <%
