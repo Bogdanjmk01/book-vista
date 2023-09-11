@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -47,5 +49,80 @@ public class BookOrderDAOImpl implements BookOrderDAO {
         }
 
         return f;
+    }
+
+    @Override
+    public List<BookOrder> getOrders(String email) {
+        List<BookOrder> orders = new ArrayList<>();
+        BookOrder bookOrder;
+
+        try {
+            String sql = """
+                    SELECT * FROM book_order WHERE email = ?;
+                    """;
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                bookOrder = new BookOrder();
+
+                bookOrder.setId(rs.getLong(1));
+                bookOrder.setOrderId(rs.getString(2));
+                bookOrder.setUserName(rs.getString(3));
+                bookOrder.setEmail(rs.getString(4));
+                bookOrder.setFullAddress(rs.getString(5));
+                bookOrder.setPhoneNumber(rs.getString(6));
+                bookOrder.setBookName(rs.getString(7));
+                bookOrder.setAuthor(rs.getString(8));
+                bookOrder.setPrice(rs.getDouble(9));
+                bookOrder.setPaymentType(rs.getString(10));
+
+                orders.add(bookOrder);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return orders;
+    }
+
+    @Override
+    public List<BookOrder> getAllOrders() {
+        List<BookOrder> orders = new ArrayList<>();
+        BookOrder bookOrder;
+
+        try {
+            String sql = """
+                    SELECT * FROM book_order;
+                    """;
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                bookOrder = new BookOrder();
+
+                bookOrder.setId(rs.getLong(1));
+                bookOrder.setOrderId(rs.getString(2));
+                bookOrder.setUserName(rs.getString(3));
+                bookOrder.setEmail(rs.getString(4));
+                bookOrder.setFullAddress(rs.getString(5));
+                bookOrder.setPhoneNumber(rs.getString(6));
+                bookOrder.setBookName(rs.getString(7));
+                bookOrder.setAuthor(rs.getString(8));
+                bookOrder.setPrice(rs.getDouble(9));
+                bookOrder.setPaymentType(rs.getString(10));
+
+                orders.add(bookOrder);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return orders;
     }
 }

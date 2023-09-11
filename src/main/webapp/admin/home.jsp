@@ -1,3 +1,8 @@
+<%@ page import="com.bogdanjmk.book_vista.dao.BookOrderDAO" %>
+<%@ page import="com.bogdanjmk.book_vista.dao.impl.BookOrderDAOImpl" %>
+<%@ page import="com.bogdanjmk.book_vista.db.DatabaseConnection" %>
+<%@ page import="com.bogdanjmk.book_vista.entity.BookOrder" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page isELIgnored="false" %>
@@ -9,6 +14,7 @@
 
 <%--    <link rel="stylesheet" href="../css/style.css">--%>
     <link rel="stylesheet" href="components/admin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -115,7 +121,40 @@
                 </div>
 
                 <div class="activity-data">
+                    <table class="table w-100 fs-6 text-center">
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Order Number</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Book Name</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Payment Type</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <%
+                            BookOrderDAO bookOrderDAO = new BookOrderDAOImpl(DatabaseConnection.getConnection());
+                            List<BookOrder> orders = bookOrderDAO.getAllOrders();
 
+                            for (BookOrder order : orders) { %>
+                        <tr>
+                            <th scope="row"><%= order.getOrderId() %></th>
+                            <th><%= order.getUserName() %></th>
+                            <th><%= order.getFullAddress() %></th>
+                            <th><%= order.getPhoneNumber() %></th>
+                            <th><%= order.getBookName()%></th>
+                            <th><%= order.getAuthor()%></th>
+                            <th><%= order.getPrice()%></th>
+                            <th><%= order.getPaymentType()%></th>
+                        </tr>
+                        <%
+                            }
+                        %>
+                        </tbody>
+                    </table>
                 </div>
                 </div>
             </div>

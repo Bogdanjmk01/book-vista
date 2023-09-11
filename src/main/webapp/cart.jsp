@@ -170,6 +170,11 @@
     <c:remove var="failed_message" scope="session" />
 </c:if>
 
+<c:if test="${not empty failed_order}">
+    <p class="text-center text-danger alert alert-danger w-100"><b>${failed_order}</b></p>
+    <c:remove var="failed_order" scope="session" />
+</c:if>
+
 <div class="card">
     <div class="row">
         <div class="col-md-8 cart">
@@ -208,19 +213,6 @@
                     <div class="col align-self-center text-right text-muted"> </div>
                 </div>
             </div>
-<%--            <div class="row">--%>
-<%--                <div class="row main align-items-center">--%>
-<%--                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>--%>
-<%--                    <div class="col">--%>
-<%--                        <div class="row text-muted">Shirt</div>--%>
-<%--                        <div class="row">Cotton T-shirt</div>--%>
-<%--                    </div>--%>
-<%--                    <div class="col">--%>
-<%--                        <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>--%>
-<%--                    </div>--%>
-<%--                    <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
 
             <div class="back-to-shop"><a href="index.jsp">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
         </div>

@@ -48,20 +48,26 @@ public class OrderServlet extends HttpServlet {
             List<BookOrder> orders = new ArrayList<>();
             Random random = new Random();
 
-            for (Cart cart : books) {
-                bookOrder = new BookOrder();
+            if (books.isEmpty()) {
+                session.setAttribute("failed_order", "Please add at least one item to the cart to be able to place an order!");
+                resp.sendRedirect("cart.jsp");
+            } else {
 
-                bookOrder.setOrderId("BOOK-ORD-00" + random.nextInt(10000));
-                bookOrder.setUserName(name);
-                bookOrder.setEmail(email);
-                bookOrder.setPhoneNumber(phone_number);
-                bookOrder.setFullAddress(full_address);
-                bookOrder.setBookName(cart.getBookName());
-                bookOrder.setAuthor(cart.getAuthor());
-                bookOrder.setPrice(totalPrice);
-                bookOrder.setPaymentType(paymentType);
+                for (Cart cart : books) {
+                    bookOrder = new BookOrder();
 
-                orders.add(bookOrder);
+                    bookOrder.setOrderId("BOOK-ORD-00" + random.nextInt(10000));
+                    bookOrder.setUserName(name);
+                    bookOrder.setEmail(email);
+                    bookOrder.setPhoneNumber(phone_number);
+                    bookOrder.setFullAddress(full_address);
+                    bookOrder.setBookName(cart.getBookName());
+                    bookOrder.setAuthor(cart.getAuthor());
+                    bookOrder.setPrice(totalPrice);
+                    bookOrder.setPaymentType(paymentType);
+
+                    orders.add(bookOrder);
+                }
             }
 
             if ("noSelect".equals(paymentType)) {

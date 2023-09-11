@@ -76,12 +76,12 @@
                                 <input type="hidden" value="<%= totalPrice %>" name="totalPrice">
                                 <div class="row">
                                         <div class="form-outline mb-4">
-                                            <input type="text" id="form3Example1m" class="form-control form-control-lg" name="user_name" value="<%= user.getName() %>" />
+                                            <input type="text" id="form3Example1m" class="form-control form-control-lg" name="user_name" value="<%= user.getName() %>" required />
                                         </div>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="form3Example2" value="<%= user.getEmail() %>" name="email" class="form-control form-control-lg" />
+                                    <input type="text" id="form3Example2" value="<%= user.getEmail() %>" name="email" class="form-control form-control-lg" required />
                                 </div>
 
                                 <div class="form-outline mb-4">
@@ -89,7 +89,7 @@
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" class="form-control form-control-lg" name="phone_number" placeholder="Enter your phone number" value="<%= user.getPhone_number() %>" />
+                                    <input type="text" class="form-control form-control-lg" name="phone_number" placeholder="Enter your phone number" value="<%= user.getPhone_number() %>" required />
                                 </div>
 
                                 <div class="row">
@@ -98,16 +98,16 @@
                                     </div>
 
                                     <div class="form-group mb-4">
-                                        <input type="text" class="form-control form-control-lg" placeholder="Enter your city" name="city">
+                                        <input type="text" class="form-control form-control-lg" placeholder="Enter your city" name="city" required>
                                     </div>
 
                                     <div class="form-group mb-4">
-                                        <input type="text" class="form-control form-control-lg" placeholder="Enter your state" name="state">
+                                        <input type="text" class="form-control form-control-lg" placeholder="Enter your state" name="state" required>
                                     </div>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="form3Example3" placeholder="Enter your zip code" name="zip_code" class="form-control form-control-lg" />
+                                    <input type="text" id="form3Example3" placeholder="Enter your zip code" name="zip_code" class="form-control form-control-lg" required />
                                 </div>
 
                                 <div class="form-group">
