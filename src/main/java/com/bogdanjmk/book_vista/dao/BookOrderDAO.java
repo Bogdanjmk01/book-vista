@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface BookOrderDAO {
     boolean saveBookOrder(List<BookOrder> bookOrders);
+    List<BookOrder> getOrders(String email);
+    List<BookOrder> getAllOrders();
 }
