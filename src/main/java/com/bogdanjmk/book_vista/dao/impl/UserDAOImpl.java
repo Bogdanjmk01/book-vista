@@ -126,4 +126,57 @@ public class UserDAOImpl implements UserDAO {
 
         return f;
     }
+
+    @Override
+    public boolean doesUserAlreadyExists(String email) {
+        try {
+            String query = """
+                    SELECT COUNT(id) AS count FROM users WHERE email = ?;
+                    """;
+
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, email);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt("count");
+
+                return count > 0;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+        return false;
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        User user = null;
+
+        try {
+            String query = """
+                    SELECT * FROM users WHERE email = ?;
+                    """;
+
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, email);
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                user = new User();
+                user.setId(rs.getLong("id"));
+                user.setName(rs.getString("name"));
+                user.setEmail(rs.getString("email"));
+                user.setPhone_number(rs.getString("phone_number"));
+                user.setPassword(rs.getString("password"));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+        return user;
+    }
 }

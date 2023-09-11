@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 
@@ -25,16 +26,27 @@ public class RegisterServlet extends HttpServlet {
             String password = req.getParameter("password");
             String agreeTerms = req.getParameter("check");
 
+            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+
             User user = new User();
             user.setName(name);
             user.setEmail(email);
             user.setPhone_number(phone_number);
-            user.setPassword(password);
+            user.setPassword(hashedPassword);
 
             HttpSession session = req.getSession();
 
             if (agreeTerms != null) {
                 UserDAO userDAO = new UserDAOImpl(DatabaseConnection.getConnection());
+
+                if (userDAO.doesUserAlreadyExists(email)) {
+                    session = req.getSession();
+                    session.setAttribute("user-already-exists", "User already exists with this email!");
+                    resp.sendRedirect("register.jsp");
+
+                    return;
+                }
+
                 boolean canRegisterUser = userDAO.userRegister(user);
 
                 if (canRegisterUser) {

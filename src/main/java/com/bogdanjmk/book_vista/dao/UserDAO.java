@@ -7,4 +7,6 @@ public interface UserDAO {
     User loginUser(String email, String password);
     boolean checkPassword(Long userId, String password);
     boolean updateProfile(User user);
+    boolean doesUserAlreadyExists(String email);
+    User getUserByEmail(String email);
 }

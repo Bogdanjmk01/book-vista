@@ -7,6 +7,7 @@ import com.bogdanjmk.book_vista.entity.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 
@@ -23,7 +24,7 @@ public class LoginServlet extends HttpServlet {
             String password = req.getParameter("password");
             boolean rememberMe = "on".equals(req.getParameter("remember_me"));
 
-            if ("admin@gmail.com".equals(email) && "admin".equals(password)) {
+            if ("admin@gmail.com".equals(email) && BCrypt.checkpw("admin", password)) {
                 User adminUser = new User();
                 adminUser.setName("Admin");
 
@@ -37,7 +38,7 @@ public class LoginServlet extends HttpServlet {
             } else {
                 User user = userDAO.loginUser(email, password);
 
-                if (user != null) {
+                if (user != null && BCrypt.checkpw(password, user.getPassword())) {
                     session.setAttribute("userObj", user);
 
                     if (rememberMe) {
