@@ -16,4 +16,5 @@ public interface BookDAO {
     List<Book> getAllRecentBooks();
     List<Book> getAllNewBooks();
     List<Book> getAllOldBooks();
+    List<Book> searchBook(String name);
 }
