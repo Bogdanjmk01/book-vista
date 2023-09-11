@@ -18,7 +18,7 @@
     <h2>Your order was successfully placed</h2>
     <h5>We will make sure to reach to you whenever we send the package to the shipper</h5>
     <a href="index.jsp" class="btn btn-outline-secondary mt-3">Home</a>
-    <a href="user_order.jsp" class="btn btn-outline-danger mt-3">View Order</a>
+    <a href="orders.jsp" class="btn btn-outline-danger mt-3">View Order</a>
 </div>
 </body>
 </html>
