@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page isELIgnored="false" %>
 <html>
 <head>
     <title>Settings Page</title>
@@ -15,9 +17,16 @@
     </style>
 </head>
 <body style="background-color: #f7f7f7">
+
+<c:if test="${empty userObj}">
+    <c:redirect url="login.jsp" />
+</c:if>
+
 <%@include file="components/navbar.jsp" %>
 <div>
-    <h3>Hello, </h3>
+    <c:if test="${not empty userObj}">
+        <h3 class="text-center">Hello, ${userObj.name}</h3>
+    </c:if>
     <div class="row p-5">
         <div class="col-md-6 mt-3">
             <a href="sell_book.jsp">
