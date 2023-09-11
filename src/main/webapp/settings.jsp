@@ -60,7 +60,7 @@
         </div>
 
         <div class="col-md-6 mt-3">
-            <a href="">
+            <a href="orders.jsp">
                 <div class="card">
                     <div class="card-body text-center">
                         <div style="overflow: hidden">
@@ -74,7 +74,7 @@
         </div>
 
         <div class="col-md-6 mt-3">
-            <a href="">
+            <a href="help_line.jsp">
                 <div class="card">
                     <div class="card-body text-center">
                         <div style="overflow: hidden">

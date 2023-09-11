@@ -7,11 +7,11 @@
 <body style="background-color: #f0f1f2">
 <%@include file="components/navbar.jsp" %>
 
-<div class="container w-100">
-    <div class="row w-100">
-        <div class="col-md-6 offset-md-4">
-            <div class="card w-100">
-                <div class="card-body">
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body w-100">
                     <h2 class="text-center">Add Address</h2>
                     <form action="">
                         <div class="row">
@@ -43,8 +43,8 @@
                             </div>
                         </div>
 
-                        <div class="text-center mt-2">
-                            <button class="btn btn-outline-secondary">Add Address</button>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-outline-secondary btn-lg">Add Address</button>
                         </div>
                     </form>
                 </div>
