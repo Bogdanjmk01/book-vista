@@ -202,6 +202,8 @@
 
                     <%
                         }
+
+                        session.setAttribute("totalPrice", totalPrice + 5);
                     %>
                     <div class="col align-self-center text-right text-muted"> </div>
                 </div>

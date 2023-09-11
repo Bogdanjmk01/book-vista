@@ -30,10 +30,16 @@
 <%@include file="components/navbar.jsp" %>
 <%
     User user = (User) session.getAttribute("userObj");
-
+    Double totalPrice = (Double) session.getAttribute("totalPrice");
 %>
 <div class="container py-5">
     <div class="row d-flex justify-content-center align-items-center">
+
+        <c:if test="${not empty failed_order}">
+            <p class="text-center text-danger alert alert-danger w-100 fs-3"><b>${failed_order}</b></p>
+            <c:remove var="failed_order" scope="session" />
+        </c:if>
+
         <div class="col">
             <div class="card my-4 shadow-3">
                 <div class="row g-0">
@@ -63,62 +69,61 @@
                         </div>
                     </div>
                     <div class="col-xl-6">
-                        <div class="card-body p-md-5 text-black">
-                            <h3 class="mb-4 text-uppercase">Delivery Info</h3>
+                        <form action="order" method="post">
+                            <div class="card-body p-md-5 text-black">
+                                <h3 class="mb-4 text-uppercase">Delivery Info</h3>
+                                <input type="hidden" value="<%= user.getId() %>" name="userId">
+                                <input type="hidden" value="<%= totalPrice %>" name="totalPrice">
+                                <div class="row">
+                                        <div class="form-outline mb-4">
+                                            <input type="text" id="form3Example1m" class="form-control form-control-lg" name="user_name" value="<%= user.getName() %>" />
+                                        </div>
+                                </div>
 
-                            <div class="row">
-                                    <div class="form-outline mb-4">
-                                        <input type="text" id="form3Example1m" class="form-control form-control-lg" value="<%= user.getName() %>" disabled />
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="form3Example2" value="<%= user.getEmail() %>" name="email" class="form-control form-control-lg" />
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" class="form-control form-control-lg" placeholder="Enter your address" name="address" />
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" class="form-control form-control-lg" name="phone_number" placeholder="Enter your phone number" value="<%= user.getPhone_number() %>" />
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group mb-4">
+                                        <input type="text" class="form-control form-control-lg" placeholder="Enter a landmark" name="landmark">
                                     </div>
-                            </div>
 
-                            <div class="form-outline mb-4">
-                                <input type="text" id="form3Example2" disabled value="<%= user.getEmail() %>" class="form-control form-control-lg" />
-                            </div>
+                                    <div class="form-group mb-4">
+                                        <input type="text" class="form-control form-control-lg" placeholder="Enter your city" name="city">
+                                    </div>
 
-                            <div class="form-outline mb-4">
-                                <input type="text" class="form-control form-control-lg" placeholder="Enter your address" />
-                            </div>
+                                    <div class="form-group mb-4">
+                                        <input type="text" class="form-control form-control-lg" placeholder="Enter your state" name="state">
+                                    </div>
+                                </div>
 
-                            <div class="form-outline mb-4">
-                                <input type="text" class="form-control form-control-lg" placeholder="Enter your phone number" value="<%= user.getPhone_number() %>" />
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group">
-                                    <select class="form-select form-select-lg mb-4" name="status" aria-label=".form-select-lg example">
-                                        <option selected>--Select--</option>
-                                        <option value="Active">Active</option>
-                                        <option value="Inactive">Inactive</option>
-                                    </select>
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="form3Example3" placeholder="Enter your zip code" name="zip_code" class="form-control form-control-lg" />
                                 </div>
 
                                 <div class="form-group">
-                                    <select class="form-select form-select-lg mb-4" name="status" aria-label=".form-select-lg example">
-                                        <option selected>--Select--</option>
-                                        <option value="Active">Active</option>
-                                        <option value="Inactive">Inactive</option>
+                                    <select class="form-select form-select-lg mb-4" name="payment_method" aria-label=".form-select-lg example" required>
+                                        <option value="noSelect" selected>--Select Payment Method--</option>
+                                        <option value="COD">COD</option>
+                                        <option value="PayPal">PayPal</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="form-outline mb-4">
-                                <input type="text" id="form3Example3" placeholder="Enter your zip code" class="form-control form-control-lg" />
-                            </div>
+                                <div class="d-flex justify-content-center mb-3">
+                                    <button type="submit" class="btn btn-dark btn-lg">PLACE ORDER</button>
+                                </div>
 
-                            <div class="form-group">
-                                <select class="form-select form-select-lg mb-4" name="payment_method" aria-label=".form-select-lg example">
-                                    <option selected>--Select Payment Method--</option>
-                                    <option value="Active">COD</option>
-                                    <option value="Inactive">PayPal</option>
-                                </select>
-                            </div>
-                        </div>
-
-                            <div class="d-flex justify-content-center mb-3">
-                                <button type="button" class="btn btn-dark btn-lg">PLACE ORDER</button>
-                            </div>
-
+                             </form>
                         </div>
                     </div>
                 </div>
