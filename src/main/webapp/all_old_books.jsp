@@ -35,7 +35,7 @@
                     Category:  <%= oldBook.getBook_category() %>
                 </div>
                 <div style="display: flex; flex-direction: row; gap: 10px">
-                    <a href="#" class="card-button"> View Details</a>
+                    <a href="view_books.jsp?id=<%= oldBook.getId() %>" class="card-button"> View Details</a>
                     <a href="#" class="card-button"><i class="bi bi-currency-euro" style="margin-top: 3px;"></i>  <%= oldBook.getPrice() %></a>
                 </div>
             </div>

@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page isELIgnored="false" %>
 <html>
 <head>
     <title>Sell Book</title>
@@ -53,7 +55,7 @@
 
         .login-box .user-box input:focus~label,
         .login-box .user-box input:valid~label {
-            top: -20px;
+            top: -15px;
             left: 0;
             color: #fafafa;
             font-size: 12px;
@@ -157,9 +159,26 @@
 <body style="background-color: #f0f1f2;">
 <%@include file="components/navbar.jsp" %>
 
+<c:if test="${empty userObj}">
+    <c:redirect url="login.jsp" />
+</c:if>
+
 <div class="login-box mt-3">
+    <c:if test="${not empty success_message}">
+        <p class="text-center text-success alert alert-success w-100">${success_message}</p>
+        <c:remove var="success_message" scope="session" />
+    </c:if>
+
+    <c:if test="${not empty failed_message}">
+        <p class="text-center text-danger alert alert-danger w-100">${failed_message}</p>
+        <c:remove var="failed_message" scope="session" />
+    </c:if>
+    <div>
+
+    </div>
     <h2>Sell Old Book</h2>
-    <form method="post" action="../add_books" enctype='multipart/form-data'>
+    <form method="post" action="add_old_book" enctype='multipart/form-data'>
+        <input type="hidden" value="${userObj.name}" name="user_email">
         <div class="user-box">
             <input type="text" name="book_name" required="">
             <label>Book Name</label>
